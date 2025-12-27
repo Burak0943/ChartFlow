@@ -1,18 +1,18 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { init, Chart, Time } from 'lightweight-charts';
+import { createChart, type IChartApi, type CandlestickData } from 'lightweight-charts';
 
 export default function TradingChart() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef<IChartApi | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    const chart = init(ref.current, {
+    const chart: any = createChart(ref.current, {
       layout: {
-        backgroundColor: '#0B1220',
+        background: { color: '#0B1220' },
         textColor: '#d1d5db'
       },
       grid: {
@@ -21,7 +21,7 @@ export default function TradingChart() {
       }
     });
 
-    const candleSeries = chart.addCandlestickSeries();
+    const candleSeries: any = chart.addCandlestickSeries();
 
     const sample = [
       { time: '2023-12-01', open: 110, high: 120, low: 100, close: 115 },

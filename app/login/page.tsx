@@ -12,9 +12,7 @@ export default function LoginPage() {
         </div>
 
         {/* Client login form */}
-        {/* @ts-expect-error Server -> Client import */}
         <div>
-          {/* @ts-expect-error Server -> Client */}
           <LoginForm />
         </div>
 

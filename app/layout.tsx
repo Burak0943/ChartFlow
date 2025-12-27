@@ -17,9 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         {/* Global toasts */}
         {/* Mount the client to the toaster-root */}
-        {/* @ts-expect-error Server components can import client providers via this pattern */}
         <div id="toaster-root">
-          {/* @ts-expect-error Async Server Component insertion for client provider */}
           <ToasterClient />
         </div>
       </body>
