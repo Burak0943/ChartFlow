@@ -6,7 +6,7 @@ import TradeHistory from '../../components/trade/TradeHistory';
 import OrderForm from '../../components/trade/OrderForm';
 
 export default async function TradePage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase.auth.getSession();
   const session = data.session;
 

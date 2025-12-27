@@ -1,11 +1,10 @@
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { createClient } from '../utils/supabase/server';
 
 export default async function Home() {
   // Check session for CTA
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase.auth.getSession();
   const session = data.session;
 
@@ -26,14 +25,9 @@ export default async function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl font-bold leading-tight"
-            >
+            <h2 className="text-5xl font-bold leading-tight">
               Trade with Speed using ChartFlow
-            </motion.h2>
+            </h2>
             <p className="mt-4 text-gray-400">
               High-performance trading terminal built for pro traders and crypto
               enthusiasts. Real-time charts, low-latency execution, and secure

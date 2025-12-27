@@ -2,7 +2,7 @@ import { createClient } from '../../utils/supabase/server';
 import { Navbar } from '../../components/Navbar';
 
 export default async function DashboardPage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data } = await supabase.auth.getSession();
   const session = data.session;
 

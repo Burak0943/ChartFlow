@@ -11,7 +11,7 @@ Setup:
 ```bash
 npm install
 # If you want the full list manually:
-# npm install next@15 react react-dom framer-motion lucide-react clsx tailwind-merge @supabase/ssr @supabase/supabase-js lightweight-charts sonner
+# npm install next@15 react react-dom lucide-react clsx tailwind-merge @supabase/ssr @supabase/supabase-js lightweight-charts sonner
 # Dev deps:
 # npm install -D typescript tailwindcss postcss autoprefixer eslint prettier @types/node
 ```

@@ -6,7 +6,7 @@ import { createClient } from './server';
  * Accepts a `NextRequest` when called from middleware/edge contexts.
  */
 export async function refreshSessionServerSide(request: NextRequest) {
-  const supabase = createClient();
+  const supabase = await createClient();
 
   try {
     // You may leverage `request` here in future (e.g. to read cookies/headers)
