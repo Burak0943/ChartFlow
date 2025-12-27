@@ -1,4 +1,5 @@
-// server component wrapper
+"use client";
+// client component — uses useState and sonner toasts
 import RegisterForm from './components/RegisterForm';
 
 import { useState } from 'react';

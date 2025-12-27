@@ -2,10 +2,6 @@
 import LoginForm from './components/LoginForm';
 
 
-import { useState } from 'react';
-import { createClient as createSupabaseBrowserClient } from '../../utils/supabase/client';
-import { toast } from 'sonner';
-
 export default function LoginPage() {
   return (
     <div className="center-screen">
