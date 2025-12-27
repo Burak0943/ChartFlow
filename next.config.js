@@ -1,14 +1,13 @@
-```typescript
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Build sırasında lint hatalarını görmezden gel
+    // Hataları yoksay ve build işlemine devam et
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Build sırasında type hatalarını görmezden gel (Sadece acil durum için)
+    // Tip hatalarını yoksay ve build işlemine devam et
     ignoreBuildErrors: true,
-  }
+  },
 };
 
 export default nextConfig;
