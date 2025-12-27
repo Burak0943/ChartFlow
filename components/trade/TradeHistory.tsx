@@ -7,7 +7,7 @@ export default function TradeHistory() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTrades((t) => [{ id: Date.now(), side: Math.random() > 0.5 ? 'buy' : 'sell', price: Math.random()*1000, amount: Math.random()*2 }, ...t].slice(0, 20));
+      setTrades((t) => [{ id: Date.now(), side: (Math.random() > 0.5 ? 'buy' : 'sell') as 'buy' | 'sell', price: Math.random()*1000, amount: Math.random()*2 }, ...t].slice(0, 20));
     }, 1500);
 
     return () => clearInterval(interval);
