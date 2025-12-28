@@ -2,60 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --bg: #0b0e11;
+  --panel: #1e2329;
+  --border: #2b3139;
+  --text-primary: #EAECEF;
+  --text-secondary: #848E9C;
+  --accent-buy: #0ECB81;
+  --accent-sell: #F6465D;
+}
+
 html, body, #__next {
   height: 100%;
 }
+
+body{
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+/* Scrollbars */
+*::-webkit-scrollbar{height:8px;width:8px}
+*::-webkit-scrollbar-track{background:transparent}
+*::-webkit-scrollbar-thumb{background:#111418;border-radius:8px;border:1px solid rgba(255,255,255,0.04)}
 
 /* Force dark theme */
 :root {
   color-scheme: dark;
 }
 
-/* Simple glassy card (legacy) */
-.card-glass {
-  background: rgba(255,255,255,0.03);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.04);
+/* Panels */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
 }
 
-/* New glass panel for exchange style */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.03);
 }
+
+.small-text { font-size: 13px; }
+.muted { color: var(--text-secondary); }
+
+/* Buy/Sell badges */
+.badge-buy{ color: var(--accent-buy); }
+.badge-sell{ color: var(--accent-sell); }
+
+/* Chart container helper */
+.chart-wrapper { width:100%; height:100%; display:flex; flex-direction:column; }
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 480ms ease-out both;
-}
-
-.animate-slide-in {
-  animation: slideIn 420ms ease-out both;
-}
+.animate-fade-in { animation: fadeIn 480ms ease-out both; }
+.animate-slide-in { animation: slideIn 420ms ease-out both; }
 
 .center-screen {
   min-height: 100vh;
