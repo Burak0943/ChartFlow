@@ -47,6 +47,7 @@ export default function TradingChart() {
       { time: '2023-12-23', open: 41800.00, high: 43000.00, low: 41800.00, close: 42900.00 },
       { time: '2023-12-24', open: 42900.00, high: 44500.00, low: 42800.00, close: 44000.00 },
       { time: '2023-12-25', open: 44000.00, high: 45000.00, low: 43500.00, close: 44800.00 },
+      { time: '2023-12-26', open: 44000.00, high: 46000.00, low: 30500.00, close: 20800.00 },
     ];
 
     newSeries.setData(data as any);
