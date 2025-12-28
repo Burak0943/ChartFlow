@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 :root{
-  --bg: #0b0e11;
-  --panel: #1e2329;
+  --brand-dark: #0e1014; /* Bitget dark */
+  --brand-gray: #1b1e25;
+  --brand-cyan: #00f0e5;
+  --bg: var(--brand-dark);
+  --panel: var(--brand-gray);
   --border: #2b3139;
   --text-primary: #EAECEF;
   --text-secondary: #848E9C;
@@ -67,12 +70,72 @@ body{
   to { opacity: 1; transform: translateX(0); }
 }
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
 .animate-fade-in { animation: fadeIn 480ms ease-out both; }
 .animate-slide-in { animation: slideIn 420ms ease-out both; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+/* Marquee helper */
+.marquee { overflow: hidden; }
+.marquee-track { display: inline-flex; gap: 2rem; animation: marquee 18s linear infinite; }
+
+/* Brand utilities */
+.text-brand-muted { color: var(--text-secondary); }
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.04) 100%); transform: translateX(-100%); transition: transform 0.6s ease; }
+.btn-shine:hover::after { transform: translateX(100%); }
 
 .center-screen {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Kayan Yazı (Marquee) */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: scroll 30s linear infinite; /* tailwind config'deki scroll keyframe'ini kullanır */
+}
+
+/* Buton Parlama Efekti */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.btn-shine:hover::after {
+  left: 100%;
 }

@@ -1,89 +1,110 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react'
+import { ArrowRight } from 'lucide-react'
 
-// Dynamic Import: Dosya yolunun doğru olduğundan eminiz
-const TradingChart = dynamic(
-  () => import('../components/trade/TradingChart'),
-  { 
-    ssr: false,
-    loading: () => <div className="w-full h-full bg-[#0b0e11] flex items-center justify-center text-gray-600">Loading Chart...</div>
-  }
-);
+type Ticker = { symbol: string; price: number; change: number }
 
-const INITIAL_MARKET_DATA = [
-  { symbol: 'BTC/USDT', price: 42500.50, change: 2.4 },
-  { symbol: 'ETH/USDT', price: 2250.80, change: -1.2 },
-  { symbol: 'SOL/USDT', price: 98.45, change: 5.6 },
-  { symbol: 'BNB/USDT', price: 310.20, change: 1.1 },
-];
-
-export default function TradePage() {
-  const [marketData, setMarketData] = useState(INITIAL_MARKET_DATA);
-  const [activeTab, setActiveTab] = useState('positions');
+export default function HomePage() {
+  const [email, setEmail] = useState('')
+  const [tickers, setTickers] = useState<Ticker[]>([
+    { symbol: 'BTC', price: 48652.12, change: 1.23 },
+    { symbol: 'ETH', price: 3290.5, change: -0.42 },
+    { symbol: 'SOL', price: 125.34, change: 2.14 },
+  ])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setMarketData((prev) =>
-        prev.map((m) => {
-          // Basitleştirilmiş rastgele fiyat değişimi (Hatasız)
-          const randomMove = (Math.random() - 0.5) * 10; 
-          const newPrice = m.price + randomMove;
-          return {
-            ...m,
-            price: Number(newPrice.toFixed(2)),
-            change: Number((m.change + (Math.random() - 0.5)).toFixed(2)),
-          };
-        })
-      );
-    }, 2000);
+    const t = setInterval(() => {
+      setTickers((prev) =>
+        prev.map((t) => ({
+          ...t,
+          price: Number((t.price * (1 + (Math.random() - 0.5) / 200)).toFixed(2)),
+          change: Number((t.change + (Math.random() - 0.5)).toFixed(2)),
+        }))
+      )
+    }, 2000)
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(t)
+  }, [])
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault()
+    alert('Thanks — we sent you a welcome email (mock)')
+  }
 
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-64px)] bg-[#0b0e11] text-[#EAECEF] overflow-hidden font-sans">
-      
-      {/* SOL PANEL */}
-      <div className="w-full md:w-[20%] border-r border-[#2b3139] flex flex-col">
-        <div className="px-4 py-3 border-b border-[#2b3139] text-xs text-[#848E9C]">Market Watch</div>
-        <div className="flex-1 overflow-y-auto">
-          {marketData.map((item) => (
-            <div key={item.symbol} className="flex justify-between px-4 py-3 hover:bg-[#1e2329] cursor-pointer border-b border-[#2b3139]/30">
-              <span className="text-white font-medium text-xs">{item.symbol}</span>
-              <div className="text-right">
-                <div className={item.change >= 0 ? 'text-[#0ECB81] text-xs' : 'text-[#F6465D] text-xs'}>{item.price.toFixed(2)}</div>
-                <div className={item.change >= 0 ? 'text-[#0ECB81] text-[10px]' : 'text-[#F6465D] text-[10px]'}>{item.change}%</div>
+    <div className="min-h-[calc(100vh-64px)] bg-brand-dark px-4 md:px-20 py-12">
+      <div className="max-w-7xl mx-auto">
+        {/* HERO */}
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* LEFT */}
+          <div className="space-y-6">
+            <h1 className="text-5xl font-bold text-white">Trade Smarter, Not Harder</h1>
+            <p className="text-brand-muted text-lg">The world's leading crypto copy trading platform.</p>
+
+            <form onSubmit={submit} className="flex flex-col sm:flex-row gap-3 sm:items-center">
+              <input aria-label="Email or phone" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email or phone number" className="flex-1 bg-brand-panel border border-brand-panel rounded-md px-4 py-3 text-white placeholder:text-brand-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan" />
+              <button aria-label="Sign up" className="mt-2 sm:mt-0 bg-brand-cyan text-black font-bold rounded-md px-6 py-3 btn-shine hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-cyan flex items-center gap-2">Sign Up <ArrowRight className="w-4 h-4" /></button>
+            </form>
+
+            <div className="flex gap-6 mt-4 text-sm">
+              <div>
+                <div className="text-xs text-brand-muted">Users</div>
+                <div className="text-white font-semibold">20M+</div>
+              </div>
+              <div>
+                <div className="text-xs text-brand-muted">Volume</div>
+                <div className="text-white font-semibold">£10B+</div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* ORTA PANEL */}
-      <div className="w-full md:w-[60%] flex flex-col border-r border-[#2b3139]">
-        <div className="flex-1 min-h-[50%] relative border-b border-[#2b3139]">
-           <TradingChart />
-        </div>
-        <div className="h-[35%] bg-[#0b0e11] flex flex-col p-4">
-           <div className="text-[#FCD535] text-xs font-bold mb-2 border-b border-[#2b3139] pb-2 w-max">POSITIONS</div>
-           <div className="text-xs text-gray-400">No open positions.</div>
-        </div>
-      </div>
-
-      {/* SAĞ PANEL */}
-      <div className="w-full md:w-[20%] bg-[#1e2329] p-4">
-        <div className="text-sm font-medium mb-4 text-[#EAECEF]">Order Entry</div>
-        <div className="space-y-4">
-            <input type="number" defaultValue="1.00" className="w-full bg-[#0b0e11] border border-[#2b3139] p-2 rounded text-sm text-white" />
-            <div className="grid grid-cols-2 gap-2">
-                <button className="bg-[#F6465D] text-white py-3 rounded text-sm font-bold">SELL</button>
-                <button className="bg-[#0ECB81] text-white py-3 rounded text-sm font-bold">BUY</button>
+            {/* Market Ticker */}
+            <div className="mt-8 marquee bg-brand-panel border border-brand-panel rounded-2xl p-3">
+              <div className="marquee-track">
+                {tickers.concat(tickers).map((t, i) => (
+                  <div key={t.symbol + i} className="flex items-center gap-3 px-4">
+                    <div className="font-semibold text-white">{t.symbol}</div>
+                    <div className="text-sm text-brand-muted">{t.price.toLocaleString()}</div>
+                    <div className={t.change >= 0 ? 'text-green-500 text-sm' : 'text-red-400 text-sm'}>{t.change >= 0 ? '+' : ''}{t.change}%</div>
+                  </div>
+                ))}
+              </div>
             </div>
-        </div>
-      </div>
+          </div>
 
+          {/* RIGHT */}
+          <div className="flex items-center justify-center">
+            <div className="w-full max-w-md h-80 rounded-2xl bg-gradient-to-tr from-brand-cyan/20 to-purple-500/20 border border-brand-panel shadow-xl animate-float flex items-center justify-center">
+              <div className="w-40 h-56 bg-black/20 border border-brand-panel rounded-xl flex flex-col items-center justify-center">
+                <div className="text-sm text-brand-muted">Bitcoin</div>
+                <div className="text-white font-bold text-2xl mt-2">BTC</div>
+                <div className="text-green-500 mt-2">+1.23%</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FEATURES */}
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold text-white mb-6">Why ChartFlow</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-brand-panel border border-brand-panel rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">Copy Trading</h3>
+              <p className="text-sm text-brand-muted">Follow top traders and automatically replicate their strategies with risk controls.</p>
+            </div>
+
+            <div className="bg-brand-panel border border-brand-panel rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">Security</h3>
+              <p className="text-sm text-brand-muted">Multi-layer security, cold storage for funds and rigorous monitoring.</p>
+            </div>
+
+            <div className="bg-brand-panel border border-brand-panel rounded-xl p-6">
+              <h3 className="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+              <p className="text-sm text-brand-muted">Our team is available around the clock for professional support.</p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
-  );
+  )
 }

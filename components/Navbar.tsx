@@ -1,41 +1,55 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { User } from 'lucide-react';
+import Link from "next/link";
+import { Search, Globe, Menu } from "lucide-react";
+import Image from "next/image";
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const isActive = (path: string) => pathname === path;
-
   return (
-    <header className="fixed top-0 w-full z-50 bg-transparent border-b border-[#222629]">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Image src="/logo.png" width={28} height={28} alt="ChartFlow" />
-          <div className="text-sm font-semibold tracking-tight">ChartFlow</div>
-        </div>
+    <nav className="fixed top-0 w-full h-16 bg-brand-dark/80 backdrop-blur-md border-b border-brand-panel z-50 px-4 md:px-6 flex items-center justify-between">
+      {/* SOL: Logo ve Linkler */}
+      <div className="flex items-center gap-8">
+        <Link href="/" className="flex items-center gap-2">
+          {/* Logo yoksa text fallback */}
+          <div className="text-2xl font-bold text-white tracking-tight">
+            Chart<span className="text-brand-cyan">Flow</span>
+          </div>
+        </Link>
 
-        <nav className="hidden md:flex gap-6 items-center text-sm text-[13px]">
-          <Link href="/trade" className={`${isActive('/trade') ? 'text-white font-semibold' : 'text-[#9AA3AB]'}`}>
-            Trade
-          </Link>
-          <Link href="/markets" className={`${isActive('/markets') ? 'text-white font-semibold' : 'text-[#9AA3AB]'}`}>
-            Markets
-          </Link>
-          <Link href="/account" className={`${isActive('/account') ? 'text-white font-semibold' : 'text-[#9AA3AB]'}`}>
-            Account
-          </Link>
-        </nav>
-
-        <div className="flex items-center gap-4 text-sm">
-          <div className="hidden md:block text-sm text-[#EAECEF]">Wallet: <span className="font-semibold">$10,000.00</span></div>
-          <button className="p-1 rounded-md hover:bg-white/3">
-            <User />
-          </button>
+        <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-brand-muted">
+          <Link href="/trade" className="hover:text-brand-cyan transition">Buy Crypto</Link>
+          <Link href="/dashboard" className="hover:text-brand-cyan transition">Markets</Link>
+          <Link href="/trade" className="text-white hover:text-brand-cyan transition">Trade</Link>
+          <Link href="#" className="hover:text-brand-cyan transition">Futures</Link>
         </div>
       </div>
-    </header>
+
+      {/* SAĞ: Araçlar ve Giriş */}
+      <div className="flex items-center gap-4">
+        <button className="text-brand-muted hover:text-white hidden sm:block">
+          <Search className="w-5 h-5" />
+        </button>
+        <button className="text-brand-muted hover:text-white hidden sm:block">
+          <Globe className="w-5 h-5" />
+        </button>
+        
+        <div className="h-4 w-[1px] bg-brand-panel hidden sm:block"></div>
+
+        <Link href="/auth" className="text-white font-medium text-sm hover:text-brand-cyan transition hidden sm:block">
+          Log In
+        </Link>
+        <Link 
+          href="/auth" 
+          className="bg-brand-cyan text-brand-dark font-bold text-sm px-4 py-2 rounded hover:bg-brand-cyanHover transition"
+        >
+          Sign Up
+        </Link>
+        
+        {/* Mobil Menü İkonu */}
+        <button className="text-white lg:hidden">
+          <Menu className="w-6 h-6" />
+        </button>
+      </div>
+    </nav>
   );
 }
