@@ -1,39 +1,38 @@
-import { createClient } from '../../utils/supabase/server';
-import { Navbar } from '../../components/Navbar';
-import OrderBook from '../../components/trade/OrderBook';
-import TradingChart from '../../components/trade/TradingChart';
-import TradeHistory from '../../components/trade/TradeHistory';
-import OrderForm from '../../components/trade/OrderForm';
+"use client";
 
-export default async function TradePage() {
-  const supabase = await createClient();
-  const { data } = await supabase.auth.getSession();
-  const session = data.session;
+import dynamic from 'next/dynamic';
 
+// 1. Grafiği "Dynamic Import" ile çağırıyoruz ve SSR'ı kapatıyoruz.
+// Bu, grafiğin sadece tarayıcıda yüklenmesini garanti eder.
+const TradingChart = dynamic(
+  () => import('../../components/trade/TradingChart'),
+  { 
+    ssr: false,
+    loading: () => <div className="w-full h-[400px] bg-gray-900 flex items-center justify-center text-gray-500">Grafik Yükleniyor...</div>
+  }
+);
+
+export default function TradePage() {
   return (
-    <div className="min-h-screen">
-      <Navbar session={!!session} />
-
-      <main className="max-w-7xl mx-auto p-4 h-[calc(100vh-64px)]">
-        <div className="grid grid-cols-12 gap-4 h-full">
-          <aside className="col-span-3 card-glass rounded-md overflow-auto">
-            <OrderBook />
-          </aside>
-
-          <section className="col-span-6 grid grid-rows-2 gap-4">
-            <div className="card-glass rounded-md p-4">
-              <TradingChart />
-            </div>
-            <div className="card-glass rounded-md p-4 overflow-auto">
-              <TradeHistory />
-            </div>
-          </section>
-
-          <aside className="col-span-3 card-glass rounded-md overflow-auto">
-            <OrderForm />
-          </aside>
+    <div className="min-h-screen bg-black text-white p-6">
+      <h1 className="text-2xl font-bold mb-6">Trade Terminali</h1>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Sol Taraf: Grafik */}
+        <div className="lg:col-span-2 h-[500px] border border-gray-800 rounded-xl overflow-hidden">
+          <TradingChart />
         </div>
-      </main>
+
+        {/* Sağ Taraf: Al-Sat Paneli (Örnek) */}
+        <div className="bg-gray-900 border border-gray-800 p-6 rounded-xl">
+          <h2 className="text-xl font-semibold mb-4">Emir Girişi</h2>
+          <div className="space-y-4">
+            <div className="bg-gray-800 p-4 rounded text-center">
+              Al / Sat Formu Buraya Gelecek
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
