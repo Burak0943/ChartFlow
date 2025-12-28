@@ -20,17 +20,23 @@ export default function MarketWatch() {
   const [markets, setMarkets] = useState<Market[]>(sample)
 
   useEffect(() => {
-    const t = setInterval(() => {
+    const interval = setInterval(() => {
       setMarkets((prev) =>
-        prev.map((m) => ({
-          ...m,
-          price: +(m.price * (1 + (Math.random() - 0.5) / 200)).toFixed(6)),
-          change: +((Math.random() - 0.5) * 2).toFixed(2),
-        }))
-    }, 2000)
+        prev.map((m) => {
+          const randomMove = (Math.random() - 0.5) * 10;
+          const newPrice = m.price + randomMove;
+          const newChange = m.change + (Math.random() - 0.5);
+          return {
+            ...m,
+            price: Number(newPrice.toFixed(2)),
+            change: Number(newChange.toFixed(2)),
+          };
+        })
+      );
+    }, 2000);
 
-    return () => clearInterval(t)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="panel w-full max-w-xs p-2">

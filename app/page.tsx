@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 
 // Dynamic Import: Dosya yolunun doğru olduğundan eminiz
 const TradingChart = dynamic(
-  () => import('../../components/trade/TradingChart'),
+  () => import('../components/trade/TradingChart'),
   { 
     ssr: false,
     loading: () => <div className="w-full h-full bg-[#0b0e11] flex items-center justify-center text-gray-600">Loading Chart...</div>
