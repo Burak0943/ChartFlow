@@ -1,13 +1,12 @@
 // server component wrapper
 import LoginForm from './components/LoginForm';
 
-
 export default function LoginPage() {
   return (
-    <div className="center-screen">
-      <div className="w-full max-w-md card-glass p-8 rounded-xl">
+    <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(ellipse_at_top_right,_#0b122033,_transparent)] p-6">
+      <div className="w-full max-w-md glass-panel p-8 rounded-2xl animate-fade-in">
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold">ChartFlow</h2>
+          <h2 className="text-3xl font-bold">ChartFlow</h2>
           <p className="text-sm text-gray-400">Sign in to your account</p>
         </div>
 
@@ -17,7 +16,7 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-4 text-center text-sm">
-          <a href="/register" className="text-blue-400">
+          <a href="/register" className="text-green-400">
             Create account
           </a>
         </div>

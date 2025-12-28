@@ -1,5 +1,4 @@
 import { createClient } from '../../utils/supabase/server';
-import { Navbar } from '../../components/Navbar';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -19,8 +18,6 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <Navbar session={!!session} />
-
       <main className="max-w-6xl mx-auto p-4">
         <div className="card-glass p-6 rounded-md">
           <h3 className="text-lg font-semibold">Wallet Balance</h3>
