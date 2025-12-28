@@ -7,10 +7,10 @@ export default function TradingChart() {
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Container yoksa işlem yapma
+    // If container is missing, exit
     if (!chartContainerRef.current) return;
 
-    // 1. Grafiği Oluştur
+    // 1. Create chart
     const chart = createChart(chartContainerRef.current, {
       layout: {
         background: { type: ColorType.Solid, color: '#111827' }, // Koyu mod arka plan
@@ -28,7 +28,7 @@ export default function TradingChart() {
       },
     });
 
-    // 2. Mum Serisini Ekle
+    // 2. Add candlestick series
     const newSeries = chart.addCandlestickSeries({
       upColor: '#22c55e',
       downColor: '#ef4444',
@@ -37,7 +37,7 @@ export default function TradingChart() {
       wickDownColor: '#ef4444',
     });
 
-    // 3. Verileri Yükle
+    // 3. Load data
     const data = [
       { time: '2023-12-18', open: 41000.50, high: 42000.00, low: 40500.00, close: 41500.20 },
       { time: '2023-12-19', open: 41500.20, high: 43000.00, low: 41000.00, close: 42800.50 },
@@ -52,7 +52,7 @@ export default function TradingChart() {
 
     newSeries.setData(data as any);
 
-    // 4. Boyutlandırma Ayarı (Resize)
+    // 4. Resize handling
     const handleResize = () => {
       if (chartContainerRef.current) {
         chart.applyOptions({ width: chartContainerRef.current.clientWidth });
@@ -61,7 +61,7 @@ export default function TradingChart() {
 
     window.addEventListener('resize', handleResize);
 
-    // 5. Temizlik (Cleanup)
+    // 5. Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
       chart.remove();
@@ -70,8 +70,8 @@ export default function TradingChart() {
 
   return (
     <div className="w-full h-full p-4 bg-gray-900 rounded-lg border border-gray-800 flex flex-col">
-       <div className="mb-2 text-sm text-gray-400 font-mono">BTC/USDT • Günlük</div>
-       {/* Grafik burada oluşturulacak */}
+       <div className="mb-2 text-sm text-gray-400 font-mono">BTC/USDT • Daily</div>
+       {/* Chart will be rendered here */}
        <div ref={chartContainerRef} className="w-full flex-1 min-h-[400px]" />
     </div>
   );

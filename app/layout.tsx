@@ -24,11 +24,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="mt-8 border-t border-white/5 py-6">
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
             <div className="flex items-center gap-4">
-              <a href="/privacy">Gizlilik Politikası</a>
-              <a href="/terms">Kullanım Koşulları</a>
-              <a href="/support">Destek</a>
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/terms">Terms of Service</a>
+              <a href="/support">Support</a>
             </div>
-            <div>© {new Date().getFullYear()} ChartFlow. Tüm hakları saklıdır.</div>
+            <div>© {new Date().getFullYear()} ChartFlow. All rights reserved.</div>
           </div>
         </footer>
 

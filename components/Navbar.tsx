@@ -20,20 +20,20 @@ export default function Navbar() {
           <Link href="/trade" className={`text-sm ${isActive('/trade') ? 'text-white font-semibold' : 'text-gray-300'}`}>
             Trade
           </Link>
-          <Link href="/piyasalar" className={`text-sm ${isActive('/piyasalar') ? 'text-white font-semibold' : 'text-gray-300'}`}>
-            Piyasalar
+          <Link href="/markets" className={`text-sm ${isActive('/markets') ? 'text-white font-semibold' : 'text-gray-300'}`}>
+            Markets
           </Link>
-          <Link href="/cuzdan" className={`text-sm ${isActive('/cuzdan') ? 'text-white font-semibold' : 'text-gray-300'}`}>
-            Cüzdan
+          <Link href="/wallet" className={`text-sm ${isActive('/wallet') ? 'text-white font-semibold' : 'text-gray-300'}`}>
+            Wallet
           </Link>
         </nav>
 
         <div className="flex items-center gap-3">
           <Link href="/login" className="text-sm text-gray-200">
-            Giriş Yap
+            Log In
           </Link>
           <Link href="/register" className="ml-2 inline-block bg-green-500 text-black px-4 py-2 rounded-md font-semibold">
-            Üye Ol
+            Sign Up
           </Link>
         </div>
       </div>

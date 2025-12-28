@@ -7,7 +7,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md glass-panel p-8 rounded-2xl animate-fade-in">
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold">ChartFlow</h2>
-          <p className="text-sm text-gray-400">Sign in to your account</p>
+          <p className="text-sm text-gray-400 font-medium">Welcome Back</p>
         </div>
 
         {/* Client login form */}
@@ -16,8 +16,9 @@ export default function LoginPage() {
         </div>
 
         <div className="mt-4 text-center text-sm">
-          <a href="/register" className="text-green-400">
-            Create account
+          <span className="text-gray-400">Don't have an account? </span>
+          <a href="/register" className="text-green-400 font-semibold">
+            Sign Up Now
           </a>
         </div>
       </div>

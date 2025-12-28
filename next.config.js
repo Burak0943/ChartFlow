@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Burası şimdilik boş kalsın, Next.js 16 varsayılan ayarlarıyla en iyi çalışır.
+  // Leave empty for now — Next.js 16 works best with default settings.
 };
 
 export default nextConfig;

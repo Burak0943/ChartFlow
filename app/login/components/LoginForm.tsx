@@ -17,7 +17,7 @@ export default function LoginForm() {
     setLoading(false);
 
     if (error) {
-      toast.error(error.message);
+      toast.error(`Login failed: ${error.message}`);
     } else {
       toast.success('Logged in successfully');
       window.location.href = '/trade';
@@ -47,7 +47,7 @@ export default function LoginForm() {
         className="w-full p-3 rounded-md bg-green-500 text-black font-semibold hover:brightness-95 disabled:opacity-60"
         disabled={loading}
       >
-        {loading ? 'Signing in...' : 'Giriş Yap'}
+        {loading ? 'Signing in...' : 'Log In'}
       </button>
     </form>
   );
